@@ -27,8 +27,6 @@ private slots:
 
     void on_pushButton_elimina_clicked();
 
-    void on_actionCopia_triggered();
-
 private:
     Ui::MainWindow *ui;
     sec_dialog *sec_dialogg;

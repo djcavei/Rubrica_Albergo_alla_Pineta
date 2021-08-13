@@ -28,7 +28,10 @@ int total = 0;
 vector<vector<string>> rubrica{};
 
 void writeOnFile() {
-    ofstream output("rubrica_out.txt");
+    ofstream output("rubrica.txt");
+    if(!output) {
+        EXIT_FAILURE;
+    }
     output<<rubrica.size()<<std::endl;
     for(auto& vec : rubrica) {
         for(auto& elem : vec) {
@@ -36,6 +39,8 @@ void writeOnFile() {
             output<<elem<<std::endl;
         }
     }
+    output.flush();
+    output.close();
 }
 
 void sort(vector<vector<string>>& vec) {
@@ -90,8 +95,10 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ifstream input("rubrica.txt");
-    //if(!input) std::cout<<"Non esiste";
-    //else std::cout<<"Si esiste";
+    if(!input) {
+        QMessageBox::warning(this, "File non trovato", "Impossibile aprire il file");
+        QMainWindow::close();
+    }
     input>>total;
     string s;
     getline(input, s);
@@ -108,11 +115,6 @@ MainWindow::MainWindow(QWidget *parent)
     }
     input.close();
     sort(rubrica);
-    ofstream output("detti.txt");
-    for(auto& elem : rubrica)
-        for(auto& elem2 : elem)
-            output<<elem2<<std::endl;
-    output.close();
     ui->setupUi(this);
     QListWidget list(this);
     for(vector<string> elem : rubrica) {

@@ -28,6 +28,8 @@ void sec_dialog::on_pushButton_salva_clicked()
         vec.push_back(ui->lineEdit_data->text().toStdString());
         vec.push_back(ui->textEdit_note->toPlainText().toStdString());
         int i = 0;
+        if(vec[0][0] >= 'a' && vec[0][0] <= 'z') vec[0][0] -= 32;
+        if(vec[1][0] >= 'a' && vec[1][0] <= 'z') vec[1][0] -= 32;
         for(i = 0; i < v->size(); ++i) {
             if(v->at(i).at(0) >= vec[0]){
                 if((v->at(i).at(0) == vec[0] and v->at(i).at(1) > vec[1]) || v->at(i).at(0) > vec[0]) {
