@@ -20,7 +20,7 @@
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
       </property>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <layout class="QVBoxLayout" name="verticalLayout">
         <item>
          <widget class="QLineEdit" name="line_search">
@@ -46,7 +46,7 @@
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <layout class="QVBoxLayout" name="verticalLayout_2">
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_7">
@@ -71,7 +71,13 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEdit_cognome"/>
+           <widget class="QLineEdit" name="lineEdit_cognome">
+            <property name="font">
+             <font>
+              <pointsize>11</pointsize>
+             </font>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>
@@ -98,7 +104,13 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEdit_nome"/>
+           <widget class="QLineEdit" name="lineEdit_nome">
+            <property name="font">
+             <font>
+              <pointsize>11</pointsize>
+             </font>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>
@@ -125,7 +137,13 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEdit_documento"/>
+           <widget class="QLineEdit" name="lineEdit_documento">
+            <property name="font">
+             <font>
+              <pointsize>11</pointsize>
+             </font>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>
@@ -152,7 +170,13 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEdit_residenza"/>
+           <widget class="QLineEdit" name="lineEdit_residenza">
+            <property name="font">
+             <font>
+              <pointsize>11</pointsize>
+             </font>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>
@@ -179,7 +203,13 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEdit_luogo"/>
+           <widget class="QLineEdit" name="lineEdit_luogo">
+            <property name="font">
+             <font>
+              <pointsize>11</pointsize>
+             </font>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>
@@ -206,7 +236,13 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEdit_data"/>
+           <widget class="QLineEdit" name="lineEdit_data">
+            <property name="font">
+             <font>
+              <pointsize>11</pointsize>
+             </font>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>
@@ -233,7 +269,13 @@
            </widget>
           </item>
           <item>
-           <widget class="QTextEdit" name="textEdit_note"/>
+           <widget class="QTextEdit" name="textEdit_note">
+            <property name="font">
+             <font>
+              <pointsize>11</pointsize>
+             </font>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>
@@ -246,19 +288,6 @@
             </property>
             <property name="text">
              <string>Modifica</string>
-            </property>
-            <property name="flat">
-             <bool>false</bool>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="pushButton_2_salva">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
-            <property name="text">
-             <string>Salva</string>
             </property>
             <property name="flat">
              <bool>false</bool>
@@ -315,8 +344,20 @@
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <widget class="QToolBar" name="toolBar">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
    <property name="windowTitle">
     <string>toolBar</string>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>34</width>
+     <height>34</height>
+    </size>
    </property>
    <attribute name="toolBarArea">
     <enum>TopToolBarArea</enum>
@@ -327,6 +368,10 @@
    <addaction name="actionNuovo_contatto"/>
   </widget>
   <action name="actionNuovo_contatto">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/img/img/New_contact_icon.png</normaloff>:/img/img/New_contact_icon.png</iconset>
+   </property>
    <property name="text">
     <string>Nuovo contatto</string>
    </property>
@@ -341,16 +386,28 @@
    </property>
   </action>
   <action name="actionCopia">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/img/img/copy_icon.png</normaloff>:/img/img/copy_icon.png</iconset>
+   </property>
    <property name="text">
     <string>Copia</string>
    </property>
   </action>
   <action name="actionTaglia">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/img/img/cut_icon.png</normaloff>:/img/img/cut_icon.png</iconset>
+   </property>
    <property name="text">
     <string>Taglia</string>
    </property>
   </action>
   <action name="actionIncolla">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/img/img/paste_icon.png</normaloff>:/img/img/paste_icon.png</iconset>
+   </property>
    <property name="text">
     <string>Incolla</string>
    </property>

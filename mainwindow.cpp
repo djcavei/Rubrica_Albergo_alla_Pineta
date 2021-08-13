@@ -27,6 +27,17 @@ int total = 0;
 
 vector<vector<string>> rubrica{};
 
+void writeOnFile() {
+    ofstream output("rubrica_out.txt");
+    output<<rubrica.size()<<std::endl;
+    for(auto& vec : rubrica) {
+        for(auto& elem : vec) {
+            for(auto& ch : elem) if(ch == '\n' || ch == '\t') ch = ' ';
+            output<<elem<<std::endl;
+        }
+    }
+}
+
 void sort(vector<vector<string>>& vec) {
     //implementare algoritmo che scambia a due a due
     vector<vector<string>> aux(1);
@@ -86,17 +97,14 @@ MainWindow::MainWindow(QWidget *parent)
     getline(input, s);
     while(total) {
         vector<string> vec{};
-        for(int i = 0; i < 6; ++i) {
+        for(int i = 0; i < 7; ++i) {
             string s;
             getline(input, s, '\n');
             vec.push_back(s);
         }
-        //trattare diversamente le note
-        string s;
-        getline(input, s);
-        vec.push_back(s);
         rubrica.push_back(vec);
         total--;
+        //trattare diversamente le note
     }
     input.close();
     sort(rubrica);
@@ -132,14 +140,23 @@ void update_label(Ui::MainWindow *&ui, int currentRow) {
         ui->lineEdit_residenza->setText(QString::fromStdString(rubrica[currentRow][RESIDENZA]));
         ui->textEdit_note->setText(QString::fromStdString(rubrica[currentRow][NOTE]));
     }
+    else {
+        QString eqstr = "";
+        ui->lineEdit_cognome->setText(eqstr);
+        ui->lineEdit_nome->setText(eqstr);
+        ui->lineEdit_data->setText(eqstr);
+        ui->lineEdit_documento->setText(eqstr);
+        ui->lineEdit_luogo->setText(eqstr);
+        ui->lineEdit_residenza->setText(eqstr);
+        ui->textEdit_note->setText(eqstr);
+    }
 }
 
 void MainWindow::on_listWidget_currentRowChanged(int currentRow)
 {
-    if(!edit) {
+    if(currentRow >= 0) {
         ui->pushButton_modifica->setEnabled(true);
         ui->pushButton_elimina->setEnabled(true);
-        edit = 1;
     }
     currentRow += display_offset;
     update_label(ui, currentRow);
@@ -150,6 +167,7 @@ void MainWindow::on_line_search_textChanged(const QString &arg1)
 {
     ui->pushButton_modifica->setDisabled(true);
     ui->pushButton_elimina->setDisabled(true);
+    update_label(ui,-1);
     edit = 0;
     //incolonnare cognomi|||||nomi
     ui->listWidget->clear();
@@ -173,4 +191,51 @@ void MainWindow::on_line_search_textChanged(const QString &arg1)
         }
     }
 }
+
+
+void MainWindow::on_pushButton_modifica_clicked()
+{
+
+    ui->pushButton_modifica->setDisabled(true);
+    int where = ui->listWidget->currentRow() + display_offset;
+    //esempio da copiare: ui->lineEdit_cognome->setText(QString::fromStdString(rubrica[currentRow][COGNOME]));
+    rubrica[ui->listWidget->currentRow() + display_offset][COGNOME] = ui->lineEdit_cognome->text().toStdString();
+    rubrica[ui->listWidget->currentRow() + display_offset][NOME] = ui->lineEdit_nome->text().toStdString();
+    rubrica[ui->listWidget->currentRow() + display_offset][DATA] = ui->lineEdit_data->text().toStdString();
+    rubrica[ui->listWidget->currentRow() + display_offset][RESIDENZA] = ui->lineEdit_residenza->text().toStdString();
+    rubrica[ui->listWidget->currentRow() + display_offset][LUOGO] = ui->lineEdit_luogo->text().toStdString();
+    rubrica[ui->listWidget->currentRow() + display_offset][DOCUMENTO] = ui->lineEdit_documento->text().toStdString();
+    rubrica[ui->listWidget->currentRow() + display_offset][NOTE] = ui->textEdit_note->toPlainText().toStdString();
+    sort(rubrica);
+    on_line_search_textChanged(ui->line_search->text());
+    update_label(ui, where);
+    writeOnFile();
+}
+
+
+void MainWindow::on_actionNuovo_contatto_triggered()
+{
+    sec_dialog secDialog;
+    secDialog.setWindowTitle("Aggiungi contatto");
+    secDialog.setModal(true);
+    secDialog.v = &rubrica;
+    secDialog.exec();
+    on_line_search_textChanged("");
+    writeOnFile();
+}
+
+
+void MainWindow::on_pushButton_elimina_clicked()
+{
+    if(ui->listWidget->currentRow()+display_offset >= 0 and ui->listWidget->currentRow()+display_offset <= rubrica.size()) {
+        if(QMessageBox::question(this,"Elimina","Sei sicur* di volerlo eliminare?") == QMessageBox::Yes) {
+            rubrica.erase(rubrica.begin() + ui->listWidget->currentRow() + display_offset);
+            on_line_search_textChanged(ui->line_search->text());
+            update_label(ui, -1);
+            writeOnFile();
+        }
+    }
+}
+
+
 

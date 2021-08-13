@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "sec_dialog.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -20,7 +21,16 @@ private slots:
 
     void on_line_search_textChanged(const QString &arg1);
 
+    void on_pushButton_modifica_clicked();
+
+    void on_actionNuovo_contatto_triggered();
+
+    void on_pushButton_elimina_clicked();
+
+    void on_actionCopia_triggered();
+
 private:
     Ui::MainWindow *ui;
+    sec_dialog *sec_dialogg;
 };
 #endif // MAINWINDOW_H

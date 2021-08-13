@@ -4,5 +4,9 @@
         <file>img/pineta_blu_logo.png</file>
         <file>img/pineta_logo.png</file>
         <file>img/search_contact.png</file>
+        <file>img/pineta.png</file>
+        <file>img/copy_icon.png</file>
+        <file>img/cut_icon.png</file>
+        <file>img/paste_icon.png</file>
     </qresource>
 </RCC>
