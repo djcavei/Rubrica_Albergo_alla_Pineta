@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/img">
+        <file>img/New_contact_icon.png</file>
+        <file>img/pineta_blu_logo.png</file>
+        <file>img/pineta_logo.png</file>
+        <file>img/search_contact.png</file>
+    </qresource>
+</RCC>
