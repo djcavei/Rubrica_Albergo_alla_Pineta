@@ -47,7 +47,7 @@ void sort(vector<vector<string>>& vec) {
     //implementare algoritmo che scambia a due a due
     vector<vector<string>> aux(1);
     int index;
-    for(int i = 0; i < vec.size() - 1; ++i) {
+    for(int i = 0; i < (int)vec.size() - 1; ++i) {
         aux[0] = vec[i];
         index = i;
         for(int j = i + 1; j < vec.size(); ++j) {
@@ -99,9 +99,11 @@ MainWindow::MainWindow(QWidget *parent)
         QMessageBox::warning(this, "File non trovato", "Impossibile aprire il file");
         QMainWindow::close();
     }
-    input>>total;
-    string s;
-    getline(input, s);
+    else {
+        input>>total;
+        string s;
+        getline(input, s);
+    }
     while(total) {
         vector<string> vec{};
         for(int i = 0; i < 7; ++i) {
@@ -113,7 +115,9 @@ MainWindow::MainWindow(QWidget *parent)
         total--;
         //trattare diversamente le note
     }
-    input.close();
+    if(input) {
+        input.close();
+    }
     sort(rubrica);
     ui->setupUi(this);
     QListWidget list(this);
